@@ -16,10 +16,10 @@ class ChooseList extends StatelessWidget {
 
 Widget buildList() {
   return ListView.builder(
+    itemCount: ShoppingList.shoppingList.length * 2,
     padding: EdgeInsets.all(16.0),
     itemBuilder: (context, i) {
       if (i.isOdd) return Divider();
-
       final index = i ~/ 2;
       return buildRow(index);
     },
