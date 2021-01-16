@@ -10,10 +10,16 @@ class ChooseList extends StatelessWidget {
   Widget build(BuildContext context) {
     testContext = context; // This is sketchy as hell D:
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text("Checkout Lists"),
-      ),
+      appBar: AppBar(automaticallyImplyLeading: false, title: Text("Blobrage")
+          /*ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.all(8),
+          itemCount: 1,
+          itemBuilder: (BuildContext context, int index) {
+            return Text("Yahello!");
+          },
+        ),*/
+          ),
       body: buildList(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
@@ -46,6 +52,29 @@ void onItemTap(int index) {
 }
 
 Widget buildList() {
+  int selectedIndex;
+  return DataTable(
+    showCheckboxColumn: false,
+    columns: [
+      DataColumn(label: Text("%")),
+      DataColumn(label: Text("Person")),
+      DataColumn(label: Text("Add")),
+    ],
+    rows: [
+      DataRow.byIndex(
+          //selected: ,
+          index: 0,
+          onSelectChanged: (bool yos) => print("Selected!"),
+          cells: [
+            DataCell(Text("50")),
+            DataCell(Text("Joe")),
+            DataCell(Checkbox(value: false, onChanged: null)),
+          ])
+    ],
+  );
+}
+
+/*Widget buildList() {
   return ListView.builder(
     itemCount: ShoppingList.shoppingList.length * 2,
     padding: EdgeInsets.all(16.0),
@@ -68,4 +97,4 @@ Widget buildRow(int index) {
     ),
     trailing: Checkbox(value: false, onChanged: null),
   );
-}
+}*/
