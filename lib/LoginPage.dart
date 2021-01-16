@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoplazy/SignUp.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -24,7 +25,8 @@ Widget _loginAndSignup(context) {
       alignment: MainAxisAlignment.spaceEvenly,
       children: [
         OutlinedButton(
-            onPressed: () => print("button1 Presseed!"),
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SignUp())),
             child: Text("Sign Up")),
         ElevatedButton(
             onPressed: () => print("button2 Presseed!"), child: Text("Login")),
