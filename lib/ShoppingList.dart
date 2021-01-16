@@ -43,34 +43,42 @@ class ShoppingList {
     return ShoppingList.shoppingList.iterator;
   }
 
-  factory ShoppingList.fromjson(Map<String,dynamic>) fromJson() => _ShoppngListFromJson(json);
+  factory ShoppingList.fromjson
 
-  Map<String,dynamic> toJson() => _ShoppingListToJson(this);
+  (
+
+  Map<String, dynamic>
+
+  )
+
+  fromJson() => _ShoppngListFromJson(json);
+
+  Map<String, dynamic> toJson() => _ShoppingListToJson(this);
 
 }
 
-ShoppingList _ShoppingListFromJson(Map<String,dynamic> json) {
-  ShoppingList sl=new ShoppingList();
-  (json['Items']as List).forEach(item){
+ShoppingList _ShoppingListFromJson(Map<String, dynamic> json) {
+  ShoppingList sl = new ShoppingList();
+  (json['Items'] as List).forEach(item){
     sl.add(Item.fromJson(item))
   }
 }
 
 
-Map<String, dynamic> _ShoppingListToJson(ShoppingListToJson sl) => <String, dynamic> {
-  'user': sl.getname,
-  'notes': instance.notes,
-  'type': instance.type,
-  'vaccinations': _VaccinationList(instance.vaccinations),
-};
-// 4
-List<Map<String, dynamic>> _VaccinationList(List<Vaccination> vaccinations) {
-  if (vaccinations == null) {
+Map<String, dynamic> _ShoppingListToJson(ShoppingListToJson sl) =>
+    <String, dynamic>{
+      'user': sl.getUserEmail,
+      'vaccinations': _ItemList(sl.getShoppingList),
+    };
+
+
+List<Map<String, dynamic>> _ItemList(Iterator<Item> items) {
+  if (!items.moveNext()) {
     return null;
   }
-  List<Map<String, dynamic>> vaccinationMap =List<Map<String, dynamic>>();
-  vaccinations.forEach((vaccination) {
-    vaccinationMap.add(vaccination.toJson());
-  });
-  return vaccinationMap;
+  List<Map<String, dynamic>> itemMap = List<Map<String, dynamic>>();
+  do {
+    itemmap.add(items.current.toJson)
+  } while (items.movenext());
+  return itemMap;
 }
