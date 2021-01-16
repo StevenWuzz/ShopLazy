@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "283113251636",
+    "project_id": "shoplazy-e6971",
+    "storage_bucket": "shoplazy-e6971.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283113251636:android:87bd1819532968e1e3bb61",
+        "android_client_info": {
+          "package_name": "com.example.shoplazy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283113251636-dh65hn4mgm9rka4kp3sicquc3133q54t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvfQuBOapFwGQ7vS4UHLWsYYaG9koZigQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283113251636-dh65hn4mgm9rka4kp3sicquc3133q54t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
