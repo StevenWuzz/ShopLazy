@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import "ShoppingList.dart";
+import 'package:shoplazy/InputItems.dart';
+
+BuildContext testContext;
 
 class ChooseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    testContext = context; // This is sketchy as hell D:
     return Scaffold(
       body: buildList(),
       bottomNavigationBar: BottomNavigationBar(
@@ -25,7 +29,10 @@ class ChooseList extends StatelessWidget {
 }
 
 void onItemTap(int index) {
-  print("YOOOOOO");
+  if (index == 0) {
+    Navigator.push(
+        testContext, MaterialPageRoute(builder: (context) => InputItems()));
+  }
 }
 
 Widget buildList() {
