@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoplazy/SignUp.dart';
+import 'package:shoplazy/StartScreen.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -29,7 +30,9 @@ Widget _loginAndSignup(context) {
                 context, MaterialPageRoute(builder: (context) => SignUp())),
             child: Text("Sign Up")),
         ElevatedButton(
-            onPressed: () => print("button2 Presseed!"), child: Text("Login")),
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => StartScreen())),
+            child: Text("Login")),
       ],
     ),
     Row(
