@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "ShoppingList.dart";
+import "StartShopping.dart";
 import 'package:shoplazy/InputItems.dart';
 
 BuildContext testContext;
@@ -10,6 +11,7 @@ class ChooseList extends StatelessWidget {
     testContext = context; // This is sketchy as hell D:
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Checkout Lists"),
       ),
       body: buildList(),
@@ -26,6 +28,11 @@ class ChooseList extends StatelessWidget {
             label: 'Shop',
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text("Start Shopping!"),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => StartShopping())),
       ),
     );
   }
