@@ -22,7 +22,7 @@ class App extends StatelessWidget {
           return null;//SomethingWentWrong();
         }
 
-        // Once complete, show your application
+        //Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
             title: 'ShopLazy',
@@ -35,7 +35,7 @@ class App extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return null;//Loading();
+        return Center(child: CircularProgressIndicator());//Loading();
       },
     );
   }
