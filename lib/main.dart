@@ -23,16 +23,16 @@ class App extends StatelessWidget {
         }
 
         //Once complete, show your application
-        // if (snapshot.connectionState == ConnectionState.done) {
-        //   return MaterialApp(
-        //     title: 'ShopLazy',
-        //     theme: ThemeData(
-        //       primarySwatch: Colors.blue,
-        //       visualDensity: VisualDensity.adaptivePlatformDensity,
-        //     ),
-        //     home: LoginPage(),
-        //   );
-        // }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MaterialApp(
+            title: 'ShopLazy',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: LoginPage(),
+          );
+        }
 
         // Otherwise, show something whilst waiting for initialization to complete
         return Loading(); //Loading();
