@@ -38,25 +38,25 @@ class _SignUpState extends State<SignUp> {
       ButtonBar(
         alignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ElevatedButton(
-              onPressed: () => validateAndSubmit(context),
-              child: Text("Sign up")),
           OutlinedButton(
               onPressed: () =>
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => LoginPage())),
               child: Text("Login")),
+          ElevatedButton(
+              onPressed: () => validateAndSubmit(context),
+              child: Text("Sign up")),
         ],
       ),
     ]);
   }
 
   bool validateAndSave() {
-    print("attempting to login");
+    print("attempting to Sign up");
     final form = formKey.currentState;
+    form.save();
     if (form.validate()) {
-      form.save();
       print(_email + ":" + _pass);
       return true;
     }
@@ -67,9 +67,9 @@ class _SignUpState extends State<SignUp> {
     if (validateAndSave()) {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _email, password: _pass);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => StartScreen()));
+            .createUserWithEmailAndPassword(email: _email, password: _pass);
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => StartScreen()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print('No user found for that email.');
@@ -114,7 +114,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   validator: (value) {
                     if(value.isEmpty) return 'BOOO!!!';
-                    if(_confirmPass!=)
+                    if(_confirmPass!=_pass) return 'Passwords dont match';
                     return null;
                   },
                   onSaved: (value) => _confirmPass = value),
