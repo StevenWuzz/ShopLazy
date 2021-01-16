@@ -1,7 +1,10 @@
 import "Item.dart";
 
 class ShoppingList {
-  List<Item> shoppingList;
+  static List<Item> shoppingList = [
+    Item("Milk Chocolate", 12, "choco"),
+    Item("Peanut Butter", 1, "peanutbutter"),
+  ];
 
   ShoppingList();
 
@@ -26,7 +29,7 @@ class ShoppingList {
     return false;
   }
 
-  Iterator<Item> getShoppingList() {
-    return this.shoppingList.iterator;
+  static Iterator<Item> getShoppingList() {
+    return ShoppingList.shoppingList.iterator;
   }
 }
