@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoplazy/LoginPage.dart';
 
 class SignUp extends StatelessWidget {
   @override
@@ -14,6 +15,12 @@ class SignUp extends StatelessWidget {
                   //TODO: Store the data
                 },
                 child: Text("Sign Me Up!")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                },
+                child: Text("Back to Login")),
           ],
         ),
       ),
