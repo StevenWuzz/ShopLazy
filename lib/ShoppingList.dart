@@ -6,7 +6,17 @@ class ShoppingList {
     Item("Peanut Butter", 1, "peanutbutter"),
   ];
 
-  ShoppingList();
+  String _userEmail;
+
+  ShoppingList(this._userEmail);
+
+  String getUserEmail() {
+    return this._userEmail;
+  }
+
+  void setUserEmail(String email) {
+    this._userEmail = email;
+  }
 
   void addItem(Item item) {
     if (!shoppingList.contains(item)) {

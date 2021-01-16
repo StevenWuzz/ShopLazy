@@ -9,6 +9,10 @@ class Item {
     return this._name;
   }
 
+  void setName(String name) {
+    this._name = name;
+  }
+
   int getQuant() {
     return this._quant;
   }
