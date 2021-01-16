@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
-  @override
+  @override //TODO start and finish
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

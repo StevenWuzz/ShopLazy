@@ -45,7 +45,7 @@ Widget _loginAndSignup(context) {
   ]);
 }
 
-Widget _usernameAndPasswords() {
+Widget _usernameAndPasswords() { //TODO implement Firebase Auth
   return Container(
       margin: const EdgeInsets.all(20.0),
       child: Column(
