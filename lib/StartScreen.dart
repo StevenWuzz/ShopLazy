@@ -5,16 +5,32 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First time starting up the app!'),
+        title: Text('Shopping Options'),
       ),
       body: Container(
+        margin: EdgeInsets.only(top:60, left: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Changing screen works wooooooooooooo"),
+            _prompt(),
           ],
         ),
       ),
     );
   }
+
+  Widget _prompt() {
+    return Text(
+        "What Do You Want To Do?",
+        style: TextStyle(fontSize: 30),
+    );
+  }
+
+  //TODO: Use GridView
+  /*
+  Widget _options(){
+    return GridView.count(
+      crossAxisCount: 2,
+      children: Text(),
+    );
+  }*/
 }
