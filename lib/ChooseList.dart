@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import "ShoppingList.dart";
 import "StartShopping.dart";
 import 'package:shoplazy/InputItems.dart';
+import 'PopUp.dart';
+import 'PopUpContent.dart';
 
 BuildContext testContext;
 
@@ -21,7 +23,7 @@ class ChooseList extends StatelessWidget {
           },
         ),*/
           ),
-      body: buildList(),
+      body: buildList(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         onTap: onItemTap,
@@ -52,7 +54,7 @@ void onItemTap(int index) {
   }
 }
 
-Widget buildList() {
+Widget buildList(context) {
   return Column(
     children: [
       DataTable(
@@ -65,7 +67,7 @@ Widget buildList() {
         rows: [
           DataRow.byIndex(
               index: 0,
-              onSelectChanged: (bool yos) => print("Selected!"),
+              onSelectChanged: (bool yos) => showPopup(context, _popupBody(), 'Popup Demo'),//print("Selected!"),
               cells: [
                 DataCell(Text("50")),
                 DataCell(Text("Joe")),
@@ -101,3 +103,45 @@ Widget buildRow(int index) {
     trailing: Checkbox(value: false, onChanged: null),
   );
 }*/
+
+//______________________________________________________________________________
+
+
+showPopup(BuildContext context, Widget widget, String title,
+    {BuildContext popupContext}) {
+  Navigator.push(
+    context,
+    PopupLayout(
+      top: 30,
+      left: 30,
+      right: 30,
+      bottom: 50,
+      child: PopupContent(
+        content: Scaffold(
+          appBar: AppBar(
+            title: Text(title),
+            leading: new Builder(builder: (context) {
+              return IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  try {
+                    Navigator.pop(context); //close the popup
+                  } catch (e) {}
+                },
+              );
+            }),
+            brightness: Brightness.light,
+          ),
+          resizeToAvoidBottomPadding: false,
+          body: widget,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _popupBody() {
+  return Container(
+    child: Text('This is a popup window'),
+  );
+}
