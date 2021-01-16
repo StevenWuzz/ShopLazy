@@ -9,6 +9,8 @@ class AdjacencyMatrix {
     return _singleton;
   }
 
+  // hi
+
   int getEmailIndex(String email) {
     for (int i = 0; i < emails.length; i++) {
       if (emails[i] == email) {
