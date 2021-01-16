@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return null;//SomethingWentWrong();
+          return null; //SomethingWentWrong();
         }
 
         // Once complete, show your application
@@ -35,8 +35,23 @@ class App extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return null;//Loading();
+        return Loading(); //Loading();
       },
     );
   }
+}
+
+Widget Loading() {
+  return Scaffold(
+    body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "ShopLazy",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 50),
+        ),
+      ],
+    ),
+  );
 }

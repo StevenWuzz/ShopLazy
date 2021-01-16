@@ -5,13 +5,27 @@ class ChooseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        title: Text("Choose the following lists"),
-      ),*/
       body: buildList(),
-      //Text("Choose the following lists"),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1,
+        onTap: onItemTap,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.library_add),
+            label: 'Lists',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_shopping_cart),
+            label: 'Shop',
+          ),
+        ],
+      ),
     );
   }
+}
+
+void onItemTap(int index) {
+  print("YOOOOOO");
 }
 
 Widget buildList() {
