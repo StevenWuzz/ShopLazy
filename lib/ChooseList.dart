@@ -10,7 +10,8 @@ class ChooseList extends StatelessWidget {
   Widget build(BuildContext context) {
     testContext = context; // This is sketchy as hell D:
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false, title: Text("Blobrage")
+      appBar: AppBar(
+          automaticallyImplyLeading: false, title: Text("Choose Lists!")
           /*ListView.builder(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.all(8),
@@ -52,24 +53,45 @@ void onItemTap(int index) {
 }
 
 Widget buildList() {
-  int selectedIndex;
-  return DataTable(
-    showCheckboxColumn: false,
-    columns: [
-      DataColumn(label: Text("%")),
-      DataColumn(label: Text("Person")),
-      DataColumn(label: Text("Add")),
-    ],
-    rows: [
-      DataRow.byIndex(
-          //selected: ,
-          index: 0,
-          onSelectChanged: (bool yos) => print("Selected!"),
-          cells: [
-            DataCell(Text("50")),
-            DataCell(Text("Joe")),
-            DataCell(Checkbox(value: false, onChanged: null)),
-          ])
+  return Column(
+    children: [
+      SizedBox(
+        height: 50,
+        width: double.infinity,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.all(15),
+          //padding: const EdgeInsets.only(right: 15),
+          itemCount: 50,
+          itemBuilder: (_, int index) {
+            return OutlinedButton(
+              /*style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.red)),*/
+              onPressed: null,
+              child: Text("Person #" + index.toString()),
+            );
+          },
+        ),
+      ),
+      DataTable(
+        showCheckboxColumn: false,
+        columns: [
+          DataColumn(label: Text("%")),
+          DataColumn(label: Text("Person")),
+          DataColumn(label: Text("Add")),
+        ],
+        rows: [
+          DataRow.byIndex(
+              index: 0,
+              onSelectChanged: (bool yos) => print("Selected!"),
+              cells: [
+                DataCell(Text("50")),
+                DataCell(Text("Joe")),
+                DataCell(Checkbox(value: false, onChanged: null)),
+              ])
+        ],
+      )
     ],
   );
 }
