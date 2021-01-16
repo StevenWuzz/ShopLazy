@@ -12,10 +12,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  BuildContext scaffoldContext;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return Scaffold(body: Builder(builder: (BuildContext context) {
+      scaffoldContext = context;
+      return Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -24,8 +27,8 @@ class _LoginPageState extends State<LoginPage> {
             _loginAndSignup(context),
           ],
         ),
-      ),
-    );
+      );
+    }));
   }
 
   final formKey =
@@ -68,6 +71,14 @@ class _LoginPageState extends State<LoginPage> {
     return false;
   }
 
+  void createSnackBar(String message) {
+    final snackBar =
+        new SnackBar(content: new Text(message), backgroundColor: Colors.red);
+
+    // Find the Scaffold in the Widget tree and use it to show a SnackBar!
+    Scaffold.of(scaffoldContext).showSnackBar(snackBar);
+  }
+
   Future<dynamic> validateAndSubmit(context) async {
     if (validateAndSave()) {
       try {
@@ -77,11 +88,12 @@ class _LoginPageState extends State<LoginPage> {
             context, MaterialPageRoute(builder: (context) => StartScreen()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
-          print('No user found for that email.');
+          createSnackBar('No user found for that email.');
+          //print('No user found for that email.');
         } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
+          createSnackBar('Wrong password provided for that user.');
         } else {
-          print("Error: " + e.code);
+          createSnackBar("Error: " + e.code);
         }
       }
     }
