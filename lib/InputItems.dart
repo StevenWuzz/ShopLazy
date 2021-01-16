@@ -19,6 +19,17 @@ class Item{
 }
 List<Item> items = [];
 
+/*
+class ShoppingTable extends StatefulWidget {
+  ShoppingTable() : super();
+
+  final String title = " ";
+
+  //@override
+  //ShoppingTableState createState() => ShoppingTableState(); The heck?
+}
+*/
+
 //TODO: Implement the functionality for users to input their desired items.
 // Try using DataTable
 class InputItems extends StatelessWidget {
@@ -26,9 +37,9 @@ class InputItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select The Following Lists!'),
+        title: Text('Input your items!'),
       ),
-      body: Text("Select The Following Lists!"),
+      body: Text("Inputs your items!"),
     );
   }
 }

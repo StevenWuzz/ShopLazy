@@ -5,9 +5,9 @@ class ChooseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Input Your Items!'),
+        title: Text("Choose the following lists"),
       ),
-      body: Text("Input Your Items"),
+      body: Text("Choose the following lists"),
     );
   }
 }
