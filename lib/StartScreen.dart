@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoplazy/ChooseList.dart';
+import 'package:shoplazy/InputItems.dart';
 
 class StartScreen extends StatelessWidget {
   @override //TODO start and finish
@@ -42,7 +44,8 @@ class Options extends StatelessWidget{
           Card(
             child: InkWell(
               onTap: () {
-                //TODO: Transition to a new screen
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => InputItems()));
               },
               child: Container(
                 child: Text('I Want To Shop'),
@@ -52,7 +55,8 @@ class Options extends StatelessWidget{
           Card(
               child: InkWell(
                   onTap: () {
-                    //TODO: Transition to a new screen
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChooseList()));
                   },
                   child: Container(
                     child: Text('I Want To Ask Others To Shop For Me '),
