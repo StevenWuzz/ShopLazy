@@ -55,25 +55,6 @@ void onItemTap(int index) {
 Widget buildList() {
   return Column(
     children: [
-      SizedBox(
-        height: 50,
-        width: double.infinity,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.all(15),
-          //padding: const EdgeInsets.only(right: 15),
-          itemCount: 50,
-          itemBuilder: (_, int index) {
-            return OutlinedButton(
-              /*style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.red)),*/
-              onPressed: null,
-              child: Text("Person #" + index.toString()),
-            );
-          },
-        ),
-      ),
       DataTable(
         showCheckboxColumn: false,
         columns: [
