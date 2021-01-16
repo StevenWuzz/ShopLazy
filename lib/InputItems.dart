@@ -5,7 +5,7 @@ BuildContext testContext;
 
 class Item {
   String name;
-  int quantity;
+  String quantity;
 
   Item({this.name, this.quantity});
 
@@ -74,7 +74,7 @@ class ShoppingTableState extends State<ShoppingTable> {
             onPressed: () {
               var item = new Item();
               item.name = "";
-              item.quantity = 1;
+              item.quantity = "";
               items.add(item);
               setState(() {});
             },
@@ -105,7 +105,11 @@ class ShoppingTableState extends State<ShoppingTable> {
                           ),
                         ),
                         DataCell(
-                          Text(item.quantity.toString()),
+                          TextField(
+                            onChanged: (quantity){
+                              item.quantity = quantity;
+                            },
+                          )
                         ),
                       ]),
                 )
