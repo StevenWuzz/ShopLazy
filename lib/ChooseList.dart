@@ -1,13 +1,40 @@
 import 'package:flutter/material.dart';
+import "ShoppingList.dart";
 
 class ChooseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text("Choose the following lists"),
-      ),
-      body: Text("Choose the following lists"),
+      ),*/
+      body: buildList(),
+      //Text("Choose the following lists"),
     );
   }
+}
+
+Widget buildList() {
+  return ListView.builder(
+    padding: EdgeInsets.all(16.0),
+    itemBuilder: (context, i) {
+      if (i.isOdd) return Divider();
+
+      final index = i ~/ 2;
+      return buildRow(null, index);
+    },
+  );
+}
+
+Widget buildRow(BuildContext context, int index) {
+  return ListTile(
+    title: Row(
+      children: [
+        Text(ShoppingList.shoppingList[index].getQuant().toString()),
+        SizedBox(width: 10),
+        Text(ShoppingList.shoppingList[index].getName())
+      ],
+    ),
+    trailing: Checkbox(value: false, onChanged: null),
+  );
 }
