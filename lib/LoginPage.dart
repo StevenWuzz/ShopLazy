@@ -108,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               //margin: const EdgeInsets.only(bottom: 5.0),
               new TextFormField(
+                  initialValue: "test@test.com",
                   obscureText: false,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -116,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                   validator: (value) => value.isEmpty ? 'BOOO!!!' : null,
                   onSaved: (value) => _email = value),
               new TextFormField(
+                  initialValue: "test12",
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),

@@ -21,12 +21,12 @@ Widget buildList() {
       if (i.isOdd) return Divider();
 
       final index = i ~/ 2;
-      return buildRow(null, index);
+      return buildRow(index);
     },
   );
 }
 
-Widget buildRow(BuildContext context, int index) {
+Widget buildRow(int index) {
   return ListTile(
     title: Row(
       children: [
