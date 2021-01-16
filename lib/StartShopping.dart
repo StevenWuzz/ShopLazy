@@ -28,7 +28,8 @@ class _BuildListState extends State<BuildList> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      topNavBar(),
+      MyThreeOptions(changeStack),
+      //topNavBar(),
       IndexedStack(
         index: currentIndex,
         children: [
@@ -44,7 +45,7 @@ class _BuildListState extends State<BuildList> {
 
   void changeStack(int index) => setState(() => currentIndex = index);
 
-  Widget topNavBar() {
+  /*Widget topNavBar() {
     return SizedBox(
       height: 50,
       width: double.infinity,
@@ -55,16 +56,16 @@ class _BuildListState extends State<BuildList> {
         itemCount: 5,
         itemBuilder: (_, int index) {
           return OutlinedButton(
-            /*style: ButtonStyle(
+            style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.red)),*/
+                      MaterialStateProperty.all<Color>(Colors.red)),
             onPressed: () => changeStack(index),
             child: Text("Person #" + index.toString()),
           );
         },
       ),
     );
-  }
+  }*/
 
   Widget buildList() {
     return DataTable(
@@ -82,6 +83,45 @@ class _BuildListState extends State<BuildList> {
               DataCell(Text("Chocolate Milk")),
             ])
       ],
+    );
+  }
+}
+
+class MyThreeOptions extends StatefulWidget {
+  Function changeStack;
+  MyThreeOptions(this.changeStack);
+
+  @override
+  _MyThreeOptionsState createState() => _MyThreeOptionsState();
+}
+
+class _MyThreeOptionsState extends State<MyThreeOptions> {
+  int _value = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      width: double.infinity,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.all(8),
+        itemCount: 5,
+        itemBuilder: (_, int index) {
+          return Container(
+              padding: EdgeInsets.only(right: 5, left: 5),
+              child: ChoiceChip(
+                label: Text('Person #$index'),
+                selected: _value == index,
+                onSelected: (bool selected) {
+                  this.widget.changeStack(index);
+                  setState(() {
+                    _value = selected ? index : null;
+                  });
+                },
+              ));
+        },
+      ),
     );
   }
 }

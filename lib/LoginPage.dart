@@ -107,16 +107,19 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               //margin: const EdgeInsets.only(bottom: 5.0),
-              new TextFormField(
-                  initialValue: "test@test.com",
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                  ),
-                  validator: (value) => value.isEmpty ? 'BOOO!!!' : null,
-                  onSaved: (value) => _email = value),
-              new TextFormField(
+              Container(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: TextFormField(
+                    initialValue: "test@test.com",
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Email',
+                    ),
+                    validator: (value) => value.isEmpty ? 'BOOO!!!' : null,
+                    onSaved: (value) => _email = value),
+              ),
+              TextFormField(
                   initialValue: "test12",
                   obscureText: true,
                   decoration: InputDecoration(

@@ -10,7 +10,7 @@ class StartScreen extends StatelessWidget {
         title: Text('Shopping Options'),
       ),
       body: Container(
-        margin: EdgeInsets.only(top:60, left: 20),
+        margin: EdgeInsets.only(top: 60, left: 20),
         child: Column(
           children: [
             _prompt(),
@@ -23,35 +23,41 @@ class StartScreen extends StatelessWidget {
 
   // Asking the user to choose
   Widget _prompt() {
-    return Text(
-        "What Do You Want To Do?",
-        style: TextStyle(fontSize: 30),
-    );
+    return Container(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Text(
+          "What Do You Want To Do?",
+          style: TextStyle(
+            fontSize: 30,
+          ),
+        ));
   }
 }
 
 // Two options for the user
-class Options extends StatelessWidget{
+class Options extends StatelessWidget {
   Options({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      child: GridView.count(
-        crossAxisCount: 2,
-        children: [
+        height: 200,
+        child: GridView.count(crossAxisCount: 2, children: [
           Card(
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => InputItems()));
-              },
-              child: Container(
-                child: Text('I Want To Shop'),
-              )
-            )
-          ),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => InputItems()));
+                  },
+                  child: Container(
+                    child: Center(
+                        child: Text(
+                      'I Want To Shop',
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    )),
+                  ))),
           Card(
               child: InkWell(
                   onTap: () {
@@ -59,12 +65,14 @@ class Options extends StatelessWidget{
                         MaterialPageRoute(builder: (context) => ChooseList()));
                   },
                   child: Container(
-                    child: Text('I Want To Ask Others To Shop For Me '),
-                  )
-              )
-          ),
-        ]
-      )
-    );
+                    child: Center(
+                        child: Text(
+                      'I Want To Ask Others To Shop For Me ',
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    )),
+                  ))),
+        ]));
   }
 }
