@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'ChooseList.dart';
+
+BuildContext testContext;
 
 class Item {
   String name;
@@ -6,7 +9,7 @@ class Item {
 
   Item({this.name, this.quantity});
 
-  static List<Item> getItems(){
+  static List<Item> getItems() {
     return items;
   }
 
@@ -27,13 +30,12 @@ class ShoppingTable extends StatefulWidget {
   ShoppingTableState createState() => ShoppingTableState();
 }
 
-
-class ShoppingTableState extends State<ShoppingTable>{
+class ShoppingTableState extends State<ShoppingTable> {
   List<Item> items;
   List<Item> selectedItems;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     selectedItems = [];
     items = Item.getItems();
@@ -43,8 +45,7 @@ class ShoppingTableState extends State<ShoppingTable>{
     setState() {
       if (selected == true) {
         selectedItems.add(item);
-      }
-      else {
+      } else {
         selectedItems.remove(item);
       }
     }
@@ -78,13 +79,12 @@ class ShoppingTableState extends State<ShoppingTable>{
               setState(() {});
             },
           ),
-
           DataTable(
             sortColumnIndex: 0,
-            columns:[
+            columns: [
               DataColumn(
-                  label: Text("Item"),
-                ),
+                label: Text("Item"),
+              ),
               DataColumn(
                 label: Text("Quantity"),
               ),
@@ -92,23 +92,24 @@ class ShoppingTableState extends State<ShoppingTable>{
             rows: items
                 .map(
                   (item) => DataRow(
-                  selected: selectedItems.contains(item),
-                  onSelectChanged: (b) {
-                    onSelectedItem(b, item);
-                  },
-                  cells: [
-                    DataCell(
-                      TextField(
-                        onChanged: (text) {
-                          item.name = text;
-                        },
-                      ),
-                    ),
-                    DataCell(
-                      Text(item.quantity.toString()),
-                    ),
-                  ]),
-            ).toList(),
+                      selected: selectedItems.contains(item),
+                      onSelectChanged: (b) {
+                        onSelectedItem(b, item);
+                      },
+                      cells: [
+                        DataCell(
+                          TextField(
+                            onChanged: (text) {
+                              item.name = text;
+                            },
+                          ),
+                        ),
+                        DataCell(
+                          Text(item.quantity.toString()),
+                        ),
+                      ]),
+                )
+                .toList(),
           ),
         ],
       ),
@@ -117,6 +118,7 @@ class ShoppingTableState extends State<ShoppingTable>{
 
   @override
   Widget build(BuildContext context) {
+    testContext = context;
     return Scaffold(
       appBar: AppBar(
         title: Text("Your Selected Items"),
@@ -147,15 +149,36 @@ class ShoppingTableState extends State<ShoppingTable>{
                   onPressed: selectedItems.isEmpty
                       ? null
                       : () {
-                    deleteSelected();
-                  },
+                          deleteSelected();
+                        },
                 ),
               ),
             ],
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: onItemTap,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.library_add),
+            label: 'Lists',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_shopping_cart),
+            label: 'Shop',
+          ),
+        ],
+      ),
     );
+  }
+}
+
+void onItemTap(int index) {
+  if (index == 1) {
+    Navigator.push(
+        testContext, MaterialPageRoute(builder: (context) => ChooseList()));
   }
 }
 
@@ -166,7 +189,7 @@ class InputItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Your Shopping List',
-      home: DataTable(),
+      home: ShoppingTable(),
     );
   }
 }

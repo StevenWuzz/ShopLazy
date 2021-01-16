@@ -9,6 +9,9 @@ class ChooseList extends StatelessWidget {
   Widget build(BuildContext context) {
     testContext = context; // This is sketchy as hell D:
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Checkout Lists"),
+      ),
       body: buildList(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
