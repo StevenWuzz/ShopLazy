@@ -1,0 +1,105 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter --no-color run --machine --track-widget-creation --device-id=524e483436453498 --start-paused --dart-define=flutter.inspector.structuredErrors=true lib/main.dart
+
+## exception
+
+FileSystemException: FileSystemException: Cannot open file, path = '/home/khalix/Documents/ShopLazy/android/local.properties' (OS Error: Permission denied, errno = 13)
+
+```
+#0      _File.throwIfError (dart:io/file_impl.dart:635:7)
+#1      _File.openSync (dart:io/file_impl.dart:479:5)
+#2      _File.writeAsBytesSync (dart:io/file_impl.dart:604:31)
+#3      _File.writeAsStringSync (dart:io/file_impl.dart:628:5)
+#4      ForwardingFile.writeAsStringSync (package:file/src/forwarding/forwarding_file.dart:148:16)
+#5      SettingsFile.writeContents (package:flutter_tools/src/base/utils.dart:143:10)
+#6      updateLocalProperties (package:flutter_tools/src/android/gradle_utils.dart:288:14)
+#7      AndroidProject.ensureReadyForPlatformSpecificTooling (package:flutter_tools/src/project.dart:798:5)
+#8      FlutterProject.ensureReadyForPlatformSpecificTooling (package:flutter_tools/src/project.dart:244:21)
+<asynchronous suspension>
+#9      FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:960:21)
+<asynchronous suspension>
+#10     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:836:33)
+<asynchronous suspension>
+#11     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart)
+#12     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:29)
+#13     _rootRun (dart:async/zone.dart:1190:13)
+#14     _CustomZone.run (dart:async/zone.dart:1093:19)
+#15     _runZoned (dart:async/zone.dart:1630:10)
+#16     runZoned (dart:async/zone.dart:1550:10)
+#17     AppContext.run (package:flutter_tools/src/base/context.dart:149:18)
+#18     FlutterCommand.run (package:flutter_tools/src/runner/flutter_command.dart:825:20)
+#19     CommandRunner.runCommand (package:args/command_runner.dart:197:27)
+#20     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:335:21)
+<asynchronous suspension>
+#21     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart)
+#22     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:29)
+#23     _rootRun (dart:async/zone.dart:1190:13)
+#24     _CustomZone.run (dart:async/zone.dart:1093:19)
+#25     _runZoned (dart:async/zone.dart:1630:10)
+#26     runZoned (dart:async/zone.dart:1550:10)
+#27     AppContext.run (package:flutter_tools/src/base/context.dart:149:18)
+#28     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:281:19)
+<asynchronous suspension>
+#29     CommandRunner.run.<anonymous closure> (package:args/command_runner.dart:112:25)
+#30     new Future.sync (dart:async/future.dart:223:31)
+#31     CommandRunner.run (package:args/command_runner.dart:112:14)
+#32     FlutterCommandRunner.run (package:flutter_tools/src/runner/flutter_command_runner.dart:230:18)
+#33     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:63:22)
+#34     _rootRun (dart:async/zone.dart:1190:13)
+#35     _CustomZone.run (dart:async/zone.dart:1093:19)
+#36     _runZoned (dart:async/zone.dart:1630:10)
+#37     runZonedGuarded (dart:async/zone.dart:1618:12)
+#38     runZoned (dart:async/zone.dart:1547:12)
+#39     run.<anonymous closure> (package:flutter_tools/runner.dart:61:18)
+<asynchronous suspension>
+#40     run.<anonymous closure> (package:flutter_tools/runner.dart)
+#41     runInContext.runnerWrapper (package:flutter_tools/src/context_runner.dart:67:18)
+<asynchronous suspension>
+#42     runInContext.runnerWrapper (package:flutter_tools/src/context_runner.dart)
+#43     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:29)
+#44     _rootRun (dart:async/zone.dart:1190:13)
+#45     _CustomZone.run (dart:async/zone.dart:1093:19)
+#46     _runZoned (dart:async/zone.dart:1630:10)
+#47     runZoned (dart:async/zone.dart:1550:10)
+#48     AppContext.run (package:flutter_tools/src/base/context.dart:149:18)
+#49     runInContext (package:flutter_tools/src/context_runner.dart:70:24)
+#50     run (package:flutter_tools/runner.dart:46:10)
+#51     main (package:flutter_tools/executable.dart:77:9)
+#52     main (file:///home/khalix/snap/flutter/common/flutter/packages/flutter_tools/bin/flutter_tools.dart:8:3)
+#53     _startIsolate.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:299:32)
+#54     _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:168:12)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 1.22.5, on Linux, locale en_US.UTF-8)
+    • Flutter version 1.22.5 at /home/khalix/snap/flutter/common/flutter
+    • Framework revision 7891006299 (5 weeks ago), 2020-12-10 11:54:40 -0800
+    • Engine revision ae90085a84
+    • Dart version 2.10.4
+
+[!] Android toolchain - develop for Android devices (Android SDK version 30.0.3)
+    • Android SDK at /home/khalix/Android/Sdk
+    • Platform android-30, build-tools 30.0.3
+    • Java binary at: /opt/android-studio/jre/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    ✗ Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/docs/get-started/install/linux#android-setup for more details.
+
+[!] Android Studio
+    • Android Studio at /opt/android-studio
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] Connected device (1 available)
+    • SM G960W (mobile) • 524e483436453498 • android-arm64 • Android 10 (API 29)
+
+! Doctor found issues in 2 categories.
+```

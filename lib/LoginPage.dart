@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:shoplazy/SignUp.dart';
 import 'package:shoplazy/StartScreen.dart';
@@ -68,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        Navigator.push(
+        if(!Navigator.canPop(context))Navigator.push(
             context, MaterialPageRoute(builder: (context) => StartScreen()));
       }
     });
