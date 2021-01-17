@@ -3,6 +3,8 @@ import 'ChooseList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'ShoppingList.dart';
 import 'Item.dart';
+import 'package:shoplazy/LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 BuildContext testContext;
 
@@ -136,6 +138,12 @@ class ShoppingTableState extends State<ShoppingTable> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Your Selected Items"),
+
+        actions: <Widget>[
+          ElevatedButton(
+              onPressed: () => _signOut(context),
+              child: Text("Logout")),
+        ],
       ),
       body: Column(
         //mainAxisSize: MainAxisSize.min,
@@ -178,6 +186,13 @@ class ShoppingTableState extends State<ShoppingTable> {
       ),
     );
   }
+}
+
+Future<void> _signOut(context) async {
+  await FirebaseAuth.instance.signOut();
+
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => LoginPage()));
 }
 
 void onItemTap(int index) {

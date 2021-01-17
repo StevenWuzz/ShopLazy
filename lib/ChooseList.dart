@@ -4,6 +4,8 @@ import "StartShopping.dart";
 import 'package:shoplazy/InputItems.dart';
 import 'PopUp.dart';
 import 'PopUpContent.dart';
+import 'package:shoplazy/LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 BuildContext testContext;
 
@@ -13,8 +15,14 @@ class ChooseList extends StatelessWidget {
     testContext = context; // This is sketchy as hell D:
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false, title: Text("Choose Lists!")
-          /*ListView.builder(
+        automaticallyImplyLeading: false, title: Text("Choose Lists!"),
+
+        actions: <Widget>[
+          ElevatedButton(
+              onPressed: () => _signOut(context),
+              child: Text("Logout")),
+        ],
+        /*ListView.builder(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.all(8),
           itemCount: 1,
@@ -22,7 +30,7 @@ class ChooseList extends StatelessWidget {
             return Text("Yahello!");
           },
         ),*/
-          ),
+      ),
       body: buildList(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
@@ -40,8 +48,10 @@ class ChooseList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Start Shopping!"),
-        onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => StartShopping())),
+        onPressed: () =>
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StartShopping())),
       ),
     );
   }
@@ -52,6 +62,13 @@ void onItemTap(int index) {
     Navigator.push(
         testContext, MaterialPageRoute(builder: (context) => InputItems()));
   }
+}
+
+Future<void> _signOut(context) async {
+  await FirebaseAuth.instance.signOut();
+
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => LoginPage()));
 }
 
 Widget buildList(context) {
@@ -67,8 +84,10 @@ Widget buildList(context) {
         rows: [
           DataRow.byIndex(
               index: 0,
-              onSelectChanged: (bool yos) => showPopup(
-                  context, _popupBody(), 'Popup Demo'), //print("Selected!"),
+              onSelectChanged: (bool yos) =>
+                  showPopup(
+                      context, _popupBody(), 'Popup Demo'),
+              //print("Selected!"),
               cells: [
                 DataCell(Text("50")),
                 DataCell(Text("Joe")),

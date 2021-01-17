@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shoplazy/ChooseList.dart';
 import 'package:shoplazy/InputItems.dart';
+import 'package:shoplazy/LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class StartScreen extends StatelessWidget {
   @override //TODO start and finish
@@ -8,6 +10,11 @@ class StartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Shopping Options'),
+        actions: <Widget>[
+          ElevatedButton(
+              onPressed: () => _signOut(context),
+              child: Text("Logout")),
+        ],
       ),
       body: Container(
         margin: EdgeInsets.only(top: 60, left: 20),
@@ -19,6 +26,13 @@ class StartScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _signOut(context) async {
+    await FirebaseAuth.instance.signOut();
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   // Asking the user to choose
