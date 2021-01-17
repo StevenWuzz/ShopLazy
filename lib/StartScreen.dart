@@ -9,6 +9,7 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Shopping Options'),
         actions: <Widget>[
           IconButton(

@@ -79,16 +79,19 @@ class ShoppingTableState extends State<ShoppingTable> {
       scrollDirection: Axis.vertical,
       child: Column(
         children: <Widget>[
-          MaterialButton(
-            child: Text('Add Another Item'),
-            onPressed: () {
-              var item = new InputItem();
-              item.name = "";
-              item.quantity = "";
-              items.add(item);
-              setState(() {});
-              pressed = true;
-            },
+          Container(
+            padding: EdgeInsets.only(top: 5),
+            child: OutlinedButton(
+              child: Text('Add Another Item'),
+              onPressed: () {
+                var item = new InputItem();
+                item.name = "";
+                item.quantity = "";
+                items.add(item);
+                setState(() {});
+                pressed = true;
+              },
+            ),
           ),
           ConstrainedBox(
             constraints: BoxConstraints(minWidth: double.infinity),
@@ -162,7 +165,7 @@ class ShoppingTableState extends State<ShoppingTable> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(20.0),
-                child: OutlineButton(
+                child: ElevatedButton(
                   child: Text('Checkout'),
                   onPressed: () {
                     showDialog(

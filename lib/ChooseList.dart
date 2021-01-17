@@ -8,6 +8,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 BuildContext testContext;
 
+List<People> peopleList = [People("Barack Obama", 68), People("Lyndis", 49)];
+
+class People {
+  People(this.name, this.percent);
+  String name;
+  int percent;
+  bool isChecked = false;
+}
+
 class ChooseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -81,13 +90,23 @@ class _BuildListState extends State<BuildList> {
         padding: EdgeInsets.only(bottom: 15),
         child: ListTile(
           tileColor: Color.fromARGB(50, 0, 0, 200),
-          onTap: () => showPopup(context, _popupBody(), 'Popup Demo'),
+          onTap: () => showPopup(
+              context, _popupBody(index), peopleList[index].name + "'s List"),
           key: Key(index.toString()),
-          leading: Text("50%"),
-          title: Text("Joe"),
+          leading: AspectRatio(
+            aspectRatio: 2 / 3,
+            child: Center(
+              child: Text(
+                peopleList[index].percent.toString(),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          title: Text(peopleList[index].name),
           trailing: Checkbox(
-              value: isChecked,
-              onChanged: (_) => setState(() => isChecked = !isChecked)),
+              value: peopleList[index].isChecked,
+              onChanged: (_) => setState(() =>
+                  peopleList[index].isChecked = !peopleList[index].isChecked)),
         ));
   }
 }
@@ -131,8 +150,13 @@ showPopup(BuildContext context, Widget widget, String title,
   );
 }
 
-Widget _popupBody() {
+Widget _popupBody(index) {
+  index++;
   return Container(
-    child: Text('This is a popup window'),
+    child: Center(
+      child: Text('This a list of ingredients ' +
+          peopleList[index - 1].name +
+          " needs."),
+    ),
   );
 }

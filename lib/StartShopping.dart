@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:shoplazy/ShoppingList.dart';
 
+class Ingredient {
+  Ingredient(this.name, this.quantity);
+  int quantity;
+  String name;
+  bool isEnabled = false;
+}
+
+List<Ingredient> ingredientList = [
+  Ingredient("Bubble Tea", 4),
+  Ingredient("Nintendo Switch", 1)
+];
+
 class StartShopping extends StatelessWidget {
   final ShoppingList lists;
 
@@ -34,10 +46,18 @@ class _BuildListState extends State<BuildList> {
         index: currentIndex,
         children: [
           BuildIngredients(),
-          Text("yooooo"),
-          Text("Page 3!"),
-          Text("last page..."),
-          Text("SIKE"),
+          Center(
+            child: Text("yooooo"),
+          ),
+          Center(
+            child: Text("Page 3!"),
+          ),
+          Center(
+            child: Text("last page..."),
+          ),
+          Center(
+            child: Text("SIKE"),
+          ),
         ],
       ),
     ]);
@@ -75,13 +95,22 @@ class _BuildIngredientsState extends State<BuildIngredients> {
     return Container(
       padding: EdgeInsets.only(bottom: 15),
       child: Opacity(
-          opacity: isEnabled ? 1.0 : 0.6,
+          opacity: ingredientList[index].isEnabled ? 1.0 : 0.6,
           child: ListTile(
             tileColor: Color.fromARGB(50, 0, 0, 200),
-            onTap: () => setState(() => isEnabled = !isEnabled),
+            onTap: () => setState(() => ingredientList[index].isEnabled =
+                !ingredientList[index].isEnabled),
             key: Key(index.toString()),
-            leading: Text("12"),
-            title: Text("Banana"),
+            leading: AspectRatio(
+              aspectRatio: 2 / 3,
+              child: Center(
+                child: Text(
+                  ingredientList[index].quantity.toString(),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            title: Text(ingredientList[index].name),
           )),
     );
   }
@@ -100,27 +129,30 @@ class _MyThreeOptionsState extends State<MyThreeOptions> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: double.infinity,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.all(8),
-        itemCount: 5,
-        itemBuilder: (_, int index) {
-          return Container(
-              padding: EdgeInsets.only(right: 5, left: 5),
-              child: ChoiceChip(
-                label: Text('Person #$index'),
-                selected: _value == index,
-                onSelected: (bool selected) {
-                  this.widget.changeStack(index);
-                  setState(() {
-                    _value = selected ? index : null;
-                  });
-                },
-              ));
-        },
+    return Container(
+      padding: EdgeInsets.only(top: 5),
+      child: SizedBox(
+        height: 50,
+        width: double.infinity,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.all(8),
+          itemCount: 5,
+          itemBuilder: (_, int index) {
+            return Container(
+                padding: EdgeInsets.only(right: 5, left: 5),
+                child: ChoiceChip(
+                  label: Text('Person #' + (index + 1).toString()),
+                  selected: _value == index,
+                  onSelected: (bool selected) {
+                    this.widget.changeStack(index);
+                    setState(() {
+                      _value = selected ? index : null;
+                    });
+                  },
+                ));
+          },
+        ),
       ),
     );
   }

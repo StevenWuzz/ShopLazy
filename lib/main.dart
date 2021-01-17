@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return null; //SomethingWentWrong();
+          return Container(); //SomethingWentWrong();
         }
 
         //Once complete, show your application
