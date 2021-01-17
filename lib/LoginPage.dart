@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   BuildContext scaffoldContext;
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +51,18 @@ class _LoginPageState extends State<LoginPage> {
               child: Text("Login")),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Checkbox(value: false, onChanged: null),
-          Text("Stay logged in?")
-        ],
+      InkWell(
+        onTap: () => setState(() => isChecked = !isChecked),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Checkbox(
+              value: isChecked,
+              onChanged: (bool) => setState(() => isChecked = !isChecked),
+            ),
+            Text("Stay logged in?")
+          ],
+        ),
       )
     ]);
   }
