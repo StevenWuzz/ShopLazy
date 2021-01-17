@@ -110,7 +110,7 @@ showPopup(BuildContext context, Widget widget, String title,
   Navigator.push(
     context,
     PopupLayout(
-      top: 30,
+      top: 50,
       left: 30,
       right: 30,
       bottom: 50,
