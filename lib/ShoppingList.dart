@@ -1,10 +1,7 @@
 import "Item.dart";
 
 class ShoppingList {
-  static List<Item> shoppingList = [
-    Item("Milk Chocolate", 12, "choco"),
-    Item("Peanut Butter", 1, "peanutbutter"),
-  ];
+  static List<Item> shoppingList;
 
   String _userEmail;
 

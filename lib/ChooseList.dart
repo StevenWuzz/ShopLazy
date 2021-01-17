@@ -4,6 +4,8 @@ import "StartShopping.dart";
 import 'package:shoplazy/InputItems.dart';
 import 'PopUp.dart';
 import 'PopUpContent.dart';
+import 'package:shoplazy/LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 BuildContext testContext;
 
@@ -13,7 +15,13 @@ class ChooseList extends StatelessWidget {
     testContext = context; // This is sketchy as hell D:
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false, title: Text("Choose Lists!")),
+        automaticallyImplyLeading: false,
+        title: Text("Choose Lists!"),
+        actions: <Widget>[
+          ElevatedButton(
+              onPressed: () => _signOut(context), child: Text("Logout")),
+        ],
+      ),
       body: BuildList(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
@@ -83,7 +91,17 @@ class _BuildListState extends State<BuildList> {
   }
 }
 
+Future<void> _signOut(context) async {
+  await FirebaseAuth.instance.signOut();
+
+  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+}
+
 /*return ConstrainedBox(
+
+
+Widget buildList(context) {
+  return ConstrainedBox(
       constraints: BoxConstraints(minWidth: double.infinity),
       child: DataTable(
         showCheckboxColumn: false,
@@ -95,8 +113,10 @@ class _BuildListState extends State<BuildList> {
         rows: [
           DataRow.byIndex(
               index: 0,
-              onSelectChanged: (bool yos) => showPopup(
-                  context, _popupBody(), 'Popup Demo'), //print("Selected!"),
+              onSelectChanged: (bool yos) =>
+                  showPopup(
+                      context, _popupBody(), 'Popup Demo'),
+              //print("Selected!"),
               cells: [
                 DataCell(Text("50")),
                 DataCell(Text("Joe")),

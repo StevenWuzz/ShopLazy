@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _checkLoggedIn(context);
     return Scaffold(body: Builder(builder: (BuildContext context) {
       scaffoldContext = context;
       return Container(
@@ -65,6 +66,18 @@ class _LoginPageState extends State<LoginPage> {
         ),
       )
     ]);
+  }
+
+  void _checkLoggedIn(context) {
+    FirebaseAuth.instance.authStateChanges().listen((User user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => StartScreen()));
+      }
+    });
   }
 
   bool validateAndSave() {
