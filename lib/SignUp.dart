@@ -28,7 +28,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   final formKey =
-  new GlobalKey<FormState>(); //I know global variables ar bad, but idc atm
+      new GlobalKey<FormState>(); //I know global variables ar bad, but idc atm
   String _email;
   String _pass;
   String _confirmPass;
@@ -39,11 +39,9 @@ class _SignUpState extends State<SignUp> {
         alignment: MainAxisAlignment.spaceEvenly,
         children: [
           OutlinedButton(
-              onPressed: () =>
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage())),
-              child: Text("Login")),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage())),
+              child: Text("I have an account")),
           ElevatedButton(
               onPressed: () => validateAndSubmit(context),
               child: Text("Sign up")),
@@ -89,6 +87,14 @@ class _SignUpState extends State<SignUp> {
           key: formKey,
           child: Column(
             children: [
+              Container(
+                  padding: EdgeInsets.only(bottom: 15),
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      fontSize: 50,
+                    ),
+                  )),
               //margin: const EdgeInsets.only(bottom: 5.0),
               new TextFormField(
                   obscureText: false,
@@ -98,14 +104,20 @@ class _SignUpState extends State<SignUp> {
                   ),
                   validator: (value) => value.isEmpty ? 'BOOO!!!' : null,
                   onSaved: (value) => _email = value),
-              new TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                  ),
-                  validator: (value) => value.isEmpty ? 'BOOO!!!' : null,
-                  onSaved: (value) => _pass = value),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 15,
+                  bottom: 15,
+                ),
+                child: TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                    ),
+                    validator: (value) => value.isEmpty ? 'BOOO!!!' : null,
+                    onSaved: (value) => _pass = value),
+              ),
               new TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
@@ -113,8 +125,8 @@ class _SignUpState extends State<SignUp> {
                     labelText: 'Confirm Password',
                   ),
                   validator: (value) {
-                    if(value.isEmpty) return 'BOOO!!!';
-                    if(_confirmPass!=_pass) return 'Passwords dont match';
+                    if (value.isEmpty) return 'BOOO!!!';
+                    if (_confirmPass != _pass) return 'Passwords dont match';
                     return null;
                   },
                   onSaved: (value) => _confirmPass = value),
@@ -122,5 +134,4 @@ class _SignUpState extends State<SignUp> {
           ),
         ));
   }
-
 }
