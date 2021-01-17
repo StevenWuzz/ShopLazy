@@ -11,9 +11,10 @@ class StartScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Shopping Options'),
         actions: <Widget>[
-          ElevatedButton(
-              onPressed: () => _signOut(context),
-              child: Text("Logout")),
+          IconButton(
+            onPressed: () => _signOut(context),
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
       body: Container(

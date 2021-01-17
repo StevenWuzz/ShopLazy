@@ -33,7 +33,7 @@ class _BuildListState extends State<BuildList> {
       IndexedStack(
         index: currentIndex,
         children: [
-          buildList(),
+          BuildIngredients(),
           Text("yooooo"),
           Text("Page 3!"),
           Text("last page..."),
@@ -44,48 +44,46 @@ class _BuildListState extends State<BuildList> {
   }
 
   void changeStack(int index) => setState(() => currentIndex = index);
+}
 
-  /*Widget topNavBar() {
-    return SizedBox(
-      height: 50,
-      width: double.infinity,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.all(8),
-        //padding: const EdgeInsets.only(right: 15),
-        itemCount: 5,
-        itemBuilder: (_, int index) {
-          return OutlinedButton(
-            style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.red)),
-            onPressed: () => changeStack(index),
-            child: Text("Person #" + index.toString()),
-          );
-        },
-      ),
-    );
-  }*/
+class BuildIngredients extends StatefulWidget {
+  @override
+  _BuildIngredientsState createState() => _BuildIngredientsState();
+}
+
+class _BuildIngredientsState extends State<BuildIngredients> {
+  //double currentOpacity = 1.0;
+  bool isEnabled = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return buildList();
+  }
 
   Widget buildList() {
-    return ConstrainedBox(
-        constraints: BoxConstraints(minWidth: double.infinity),
-        child: DataTable(
-          showCheckboxColumn: false,
-          columns: [
-            DataColumn(label: Text("#")),
-            DataColumn(label: Text("Name")),
-          ],
-          rows: [
-            DataRow.byIndex(
-                index: 0,
-                onSelectChanged: (bool changed) => print("Selected!"),
-                cells: [
-                  DataCell(Text("12")),
-                  DataCell(Text("Chocolate Milk")),
-                ])
-          ],
-        ));
+    return ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        padding: EdgeInsets.all(16.0),
+        itemCount: 2,
+        itemBuilder: (_, i) {
+          return _buildRow(i);
+        });
+  }
+
+  Widget _buildRow(int index) {
+    return Container(
+      padding: EdgeInsets.only(bottom: 15),
+      child: Opacity(
+          opacity: isEnabled ? 1.0 : 0.6,
+          child: ListTile(
+            tileColor: Color.fromARGB(50, 0, 0, 200),
+            onTap: () => setState(() => isEnabled = !isEnabled),
+            key: Key(index.toString()),
+            leading: Text("12"),
+            title: Text("Banana"),
+          )),
+    );
   }
 }
 

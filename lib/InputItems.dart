@@ -141,11 +141,11 @@ class ShoppingTableState extends State<ShoppingTable> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Your Selected Items"),
-
         actions: <Widget>[
-          ElevatedButton(
-              onPressed: () => _signOut(context),
-              child: Text("Logout")),
+          IconButton(
+            onPressed: () => _signOut(context),
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
       body: Column(
@@ -214,8 +214,7 @@ class ShoppingTableState extends State<ShoppingTable> {
 Future<void> _signOut(context) async {
   await FirebaseAuth.instance.signOut();
 
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => LoginPage()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
 }
 
 void onItemTap(int index) {

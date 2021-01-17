@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import "ShoppingList.dart";
 import "StartShopping.dart";
 import 'package:shoplazy/InputItems.dart';
 import 'PopUp.dart';
@@ -18,8 +17,10 @@ class ChooseList extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text("Choose Lists!"),
         actions: <Widget>[
-          ElevatedButton(
-              onPressed: () => _signOut(context), child: Text("Logout")),
+          IconButton(
+            onPressed: () => _signOut(context),
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
       body: BuildList(),
@@ -69,25 +70,25 @@ class _BuildListState extends State<BuildList> {
   Widget buildList() {
     return ListView.builder(
         padding: EdgeInsets.all(16.0),
-        itemCount: 4,
+        itemCount: 2,
         itemBuilder: (_, i) {
-          if (i.isOdd) return Divider();
-
-          final index = i ~/ 2;
-          return _buildRow(index);
+          return _buildRow(i);
         });
   }
 
   Widget _buildRow(int index) {
-    return ListTile(
-      onTap: () => showPopup(context, _popupBody(), 'Popup Demo'),
-      key: Key(index.toString()),
-      leading: Text("50%"),
-      title: Text("Joe"),
-      trailing: Checkbox(
-          value: isChecked,
-          onChanged: (_) => setState(() => isChecked = !isChecked)),
-    );
+    return Container(
+        padding: EdgeInsets.only(bottom: 15),
+        child: ListTile(
+          tileColor: Color.fromARGB(50, 0, 0, 200),
+          onTap: () => showPopup(context, _popupBody(), 'Popup Demo'),
+          key: Key(index.toString()),
+          leading: Text("50%"),
+          title: Text("Joe"),
+          trailing: Checkbox(
+              value: isChecked,
+              onChanged: (_) => setState(() => isChecked = !isChecked)),
+        ));
   }
 }
 
@@ -96,61 +97,6 @@ Future<void> _signOut(context) async {
 
   Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
 }
-
-/*return ConstrainedBox(
-
-
-Widget buildList(context) {
-  return ConstrainedBox(
-      constraints: BoxConstraints(minWidth: double.infinity),
-      child: DataTable(
-        showCheckboxColumn: false,
-        columns: [
-          DataColumn(label: Text("%")),
-          DataColumn(label: Text("Person")),
-          DataColumn(label: Text("Add")),
-        ],
-        rows: [
-          DataRow.byIndex(
-              index: 0,
-              onSelectChanged: (bool yos) =>
-                  showPopup(
-                      context, _popupBody(), 'Popup Demo'),
-              //print("Selected!"),
-              cells: [
-                DataCell(Text("50")),
-                DataCell(Text("Joe")),
-                DataCell(Checkbox(value: false, onChanged: null)),
-              ])
-        ],
-      ));*/
-
-/*Widget buildList() {
-  return ListView.builder(
-    itemCount: ShoppingList.shoppingList.length * 2,
-    padding: EdgeInsets.all(16.0),
-    itemBuilder: (context, i) {
-      if (i.isOdd) return Divider();
-      final index = i ~/ 2;
-      return buildRow(index);
-    },
-  );
-}
-
-Widget buildRow(int index) {
-  return ListTile(
-    title: Row(
-      children: [
-        Text(ShoppingList.shoppingList[index].getQuant().toString()),
-        SizedBox(width: 10),
-        Text(ShoppingList.shoppingList[index].getName())
-      ],
-    ),
-    trailing: Checkbox(value: false, onChanged: null),
-  );
-}*/
-
-//______________________________________________________________________________
 
 showPopup(BuildContext context, Widget widget, String title,
     {BuildContext popupContext}) {
