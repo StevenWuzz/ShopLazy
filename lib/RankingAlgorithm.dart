@@ -17,14 +17,13 @@ class Algorithm {
     // Get Rankings of all Users
     List<int> rankings = graph.getAdjMat()[index];
 
+    // Sort in Ascending Order
     rankings.sort();
-
-    List<int> ordered = new List.from(rankings.reversed);
 
     List<ShoppingList> rankedLists;
 
-    for (int i = 0; i < ordered.length; i++) {
-      String listUser = graph.getEmail(ordered[i]);
+    for (int i = 0; i < rankings.length; i++) {
+      String listUser = graph.getEmail(rankings[i]);
     }
 
     return rankedLists;
