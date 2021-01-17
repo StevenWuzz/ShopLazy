@@ -1,32 +1,39 @@
 import "Item.dart";
 
 class ShoppingList {
-  static List<Item> shoppingList;
+  // List of shopping items
+  List<Item> shoppingList;
 
+  // user email associated with list
   String _userEmail;
 
   ShoppingList(this._userEmail);
 
+  // Get user email
   String getUserEmail() {
     return this._userEmail;
   }
 
+  // Set User email
   void setUserEmail(String email) {
     this._userEmail = email;
   }
 
+  // Add item to list
   void addItem(Item item) {
     if (!shoppingList.contains(item)) {
       shoppingList.add(item);
     }
   }
 
+  // Remove item from list
   void removeItem(Item item) {
     if (shoppingList.contains(item)) {
       shoppingList.remove(item);
     }
   }
 
+  // Edit quantity of item in list
   bool editItemQuant(Item item, int newQuant) {
     if (shoppingList.contains(item)) {
       shoppingList[shoppingList.indexOf(item)].setQuant(newQuant);
@@ -36,8 +43,9 @@ class ShoppingList {
     return false;
   }
 
-  static Iterator<Item> getShoppingList() {
-    return ShoppingList.shoppingList.iterator;
+  // Return iterable of shopping list items
+  Iterator<Item> getShoppingList() {
+    return this.shoppingList.iterator;
   }
 
   // factory ShoppingList.fromjson

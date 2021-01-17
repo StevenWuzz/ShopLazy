@@ -1,4 +1,5 @@
 class Item {
+  // Item information
   String _name;
   int _quant;
   String _id;
