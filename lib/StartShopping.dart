@@ -68,22 +68,24 @@ class _BuildListState extends State<BuildList> {
   }*/
 
   Widget buildList() {
-    return DataTable(
-      showCheckboxColumn: false,
-      columns: [
-        DataColumn(label: Text("#")),
-        DataColumn(label: Text("Name")),
-      ],
-      rows: [
-        DataRow.byIndex(
-            index: 0,
-            onSelectChanged: (bool changed) => print("Selected!"),
-            cells: [
-              DataCell(Text("12")),
-              DataCell(Text("Chocolate Milk")),
-            ])
-      ],
-    );
+    return ConstrainedBox(
+        constraints: BoxConstraints(minWidth: double.infinity),
+        child: DataTable(
+          showCheckboxColumn: false,
+          columns: [
+            DataColumn(label: Text("#")),
+            DataColumn(label: Text("Name")),
+          ],
+          rows: [
+            DataRow.byIndex(
+                index: 0,
+                onSelectChanged: (bool changed) => print("Selected!"),
+                cells: [
+                  DataCell(Text("12")),
+                  DataCell(Text("Chocolate Milk")),
+                ])
+          ],
+        ));
   }
 }
 

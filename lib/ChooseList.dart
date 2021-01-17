@@ -55,9 +55,9 @@ void onItemTap(int index) {
 }
 
 Widget buildList(context) {
-  return Column(
-    children: [
-      DataTable(
+  return ConstrainedBox(
+      constraints: BoxConstraints(minWidth: double.infinity),
+      child: DataTable(
         showCheckboxColumn: false,
         columns: [
           DataColumn(label: Text("%")),
@@ -67,16 +67,15 @@ Widget buildList(context) {
         rows: [
           DataRow.byIndex(
               index: 0,
-              onSelectChanged: (bool yos) => showPopup(context, _popupBody(), 'Popup Demo'),//print("Selected!"),
+              onSelectChanged: (bool yos) => showPopup(
+                  context, _popupBody(), 'Popup Demo'), //print("Selected!"),
               cells: [
                 DataCell(Text("50")),
                 DataCell(Text("Joe")),
                 DataCell(Checkbox(value: false, onChanged: null)),
               ])
         ],
-      )
-    ],
-  );
+      ));
 }
 
 /*Widget buildList() {
@@ -105,7 +104,6 @@ Widget buildRow(int index) {
 }*/
 
 //______________________________________________________________________________
-
 
 showPopup(BuildContext context, Widget widget, String title,
     {BuildContext popupContext}) {

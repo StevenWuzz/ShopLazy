@@ -27,6 +27,7 @@ class StartScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 10),
         child: Text(
           "What Do You Want To Do?",
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 30,
           ),
@@ -67,7 +68,8 @@ class Options extends StatelessWidget {
                   child: Container(
                     child: Center(
                         child: Text(
-                      'I Want To Ask Others To Shop For Me ',
+                      'I Want To Ask Others \n To Shop For Me ',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15,
                       ),
