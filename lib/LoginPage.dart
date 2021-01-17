@@ -14,6 +14,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   BuildContext scaffoldContext;
+  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     _checkLoggedIn(context);
@@ -51,20 +53,24 @@ class _LoginPageState extends State<LoginPage> {
               child: Text("Login")),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Checkbox(value: false, onChanged: null),
-          Text("Stay logged in?")
-        ],
+      InkWell(
+        onTap: () => setState(() => isChecked = !isChecked),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Checkbox(
+              value: isChecked,
+              onChanged: (bool) => setState(() => isChecked = !isChecked),
+            ),
+            Text("Stay logged in?")
+          ],
+        ),
       )
     ]);
   }
 
-  void _checkLoggedIn(context){
-    FirebaseAuth.instance
-        .authStateChanges()
-        .listen((User user) {
+  void _checkLoggedIn(context) {
+    FirebaseAuth.instance.authStateChanges().listen((User user) {
       if (user == null) {
         print('User is currently signed out!');
       } else {

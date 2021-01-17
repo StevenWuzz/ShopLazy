@@ -15,23 +15,14 @@ class ChooseList extends StatelessWidget {
     testContext = context; // This is sketchy as hell D:
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, title: Text("Choose Lists!"),
-
+        automaticallyImplyLeading: false,
+        title: Text("Choose Lists!"),
         actions: <Widget>[
           ElevatedButton(
-              onPressed: () => _signOut(context),
-              child: Text("Logout")),
+              onPressed: () => _signOut(context), child: Text("Logout")),
         ],
-        /*ListView.builder(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.all(8),
-          itemCount: 1,
-          itemBuilder: (BuildContext context, int index) {
-            return Text("Yahello!");
-          },
-        ),*/
       ),
-      body: buildList(context),
+      body: BuildList(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         onTap: onItemTap,
@@ -48,10 +39,8 @@ class ChooseList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Start Shopping!"),
-        onPressed: () =>
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StartShopping())),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => StartShopping())),
       ),
     );
   }
@@ -64,12 +53,52 @@ void onItemTap(int index) {
   }
 }
 
+class BuildList extends StatefulWidget {
+  @override
+  _BuildListState createState() => _BuildListState();
+}
+
+class _BuildListState extends State<BuildList> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return buildList();
+  }
+
+  Widget buildList() {
+    return ListView.builder(
+        padding: EdgeInsets.all(16.0),
+        itemCount: 4,
+        itemBuilder: (_, i) {
+          if (i.isOdd) return Divider();
+
+          final index = i ~/ 2;
+          return _buildRow(index);
+        });
+  }
+
+  Widget _buildRow(int index) {
+    return ListTile(
+      onTap: () => showPopup(context, _popupBody(), 'Popup Demo'),
+      key: Key(index.toString()),
+      leading: Text("50%"),
+      title: Text("Joe"),
+      trailing: Checkbox(
+          value: isChecked,
+          onChanged: (_) => setState(() => isChecked = !isChecked)),
+    );
+  }
+}
+
 Future<void> _signOut(context) async {
   await FirebaseAuth.instance.signOut();
 
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => LoginPage()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
 }
+
+/*return ConstrainedBox(
+
 
 Widget buildList(context) {
   return ConstrainedBox(
@@ -94,8 +123,7 @@ Widget buildList(context) {
                 DataCell(Checkbox(value: false, onChanged: null)),
               ])
         ],
-      ));
-}
+      ));*/
 
 /*Widget buildList() {
   return ListView.builder(
