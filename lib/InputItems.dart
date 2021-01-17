@@ -88,43 +88,46 @@ class ShoppingTableState extends State<ShoppingTable> {
               pressed = true;
             },
           ),
-          DataTable(
-            sortColumnIndex: 0,
-            columns: [
-              DataColumn(
-                label: Text("Item"),
-              ),
-              DataColumn(
-                label: Text("Quantity"),
-              ),
-            ],
-            rows: items
-                .map(
-                  (item) => DataRow(
-                  selected: selectedItems.contains(item),
-                  onSelectChanged: (b) {
-                    onSelectedItem(b, item);
-                  },
-                  cells: [
-                    DataCell(
-                      TextField(
-                        onChanged: (text) {
-                          item.name = text;
+          ConstrainedBox(
+            constraints: BoxConstraints(minWidth: double.infinity),
+            child: DataTable(
+              showCheckboxColumn: false,
+              sortColumnIndex: 0,
+              columns: [
+                DataColumn(
+                  label: Text("Item"),
+                ),
+                DataColumn(
+                  label: Text("Quantity"),
+                ),
+              ],
+              rows: items
+                  .map(
+                    (item) => DataRow(
+                        selected: selectedItems.contains(item),
+                        onSelectChanged: (b) {
+                          onSelectedItem(b, item);
                         },
-                      ),
-                    ),
-                    DataCell(
-                        TextField(
-                          onChanged: (quantity){
-                            item.quantity = quantity;
-                            addToShoppingList(pressed, item.name, item.quantity);
-                          },
-                        )
-                    ),
-                  ]),
-            )
-                .toList(),
-          ),
+                        cells: [
+                          DataCell(
+                            TextField(
+                              onChanged: (text) {
+                                item.name = text;
+                              },
+                            ),
+                          ),
+                          DataCell(TextField(
+                            onChanged: (quantity) {
+                              item.quantity = quantity;
+                              addToShoppingList(
+                                  pressed, item.name, item.quantity);
+                            },
+                          )),
+                        ]),
+                  )
+                  .toList(),
+            ),
+          )
         ],
       ),
     );
@@ -154,6 +157,26 @@ class ShoppingTableState extends State<ShoppingTable> {
                 child: OutlineButton(
                   child: Text('Checkout'),
                   onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: Text("Checkout"),
+                        content: Text("Confirm checkout?"),
+                        actions: [
+                          OutlinedButton(
+                              onPressed: () =>
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop(),
+                              child: Text("No")),
+                          ElevatedButton(
+                              onPressed: () =>
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop(),
+                              child: Text("Yes")),
+                        ],
+                      ),
+                      barrierDismissible: true,
+                    );
                     //TODO: Store the data to the database and optionally transition
                   },
                 ),
@@ -187,10 +210,10 @@ void onItemTap(int index) {
   }
 }
 
-void addToShoppingList(bool pressed, String name, String quantity){
-  if(pressed == true){
+void addToShoppingList(bool pressed, String name, String quantity) {
+  if (pressed == true) {
     int quant = int.tryParse(quantity);
-    if(quant != null){
+    if (quant != null) {
       var newItem = new Item(name, quant, "");
       currentUser.addItem(newItem);
     }
@@ -202,7 +225,7 @@ final _auth = FirebaseAuth.instance;
 String userEmail;
 void getCurrentUserEmail() async {
   final user = _auth.currentUser;
-  userEmail=user.email;
+  userEmail = user.email;
 }
 
 //TODO: Implement the functionality for users to input their desired items.

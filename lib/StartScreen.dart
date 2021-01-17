@@ -10,7 +10,7 @@ class StartScreen extends StatelessWidget {
         title: Text('Shopping Options'),
       ),
       body: Container(
-        margin: EdgeInsets.only(top: 60, left: 20),
+        margin: EdgeInsets.only(top: 60, left: 20, right: 20),
         child: Column(
           children: [
             _prompt(),
