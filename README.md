@@ -1,5 +1,6 @@
 # ShopLazy
 Hack The North 2020++ Project - ShopLazy
+
 Demo: https://www.youtube.com/watch?v=1Oh5CRH3aMU
 
 ## Getting Started
